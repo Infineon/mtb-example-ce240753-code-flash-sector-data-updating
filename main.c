@@ -7,7 +7,7 @@ Description: This is the source code for Code Flash Sector Data Updating Example
 *
 *
 *******************************************************************************
-* Copyright 2024, Cypress Semiconductor Corporation (an Infineon company) or
+* Copyright 2024-2025, Cypress Semiconductor Corporation (an Infineon company) or
 * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
 *
 * This software, including source code, documentation and related
@@ -42,6 +42,7 @@ Description: This is the source code for Code Flash Sector Data Updating Example
 #include "cybsp.h"
 #include "cy_pdl.h"
 #include "cy_retarget_io.h"
+#include "mtb_hal.h"
 
 /*******************************************************************************
 * Macros
@@ -62,6 +63,9 @@ Description: This is the source code for Code Flash Sector Data Updating Example
 /*******************************************************************************
 * Global Variables
 *******************************************************************************/
+/* For the Retarget -IO (Debug UART) usage */
+static cy_stc_scb_uart_context_t    UART_context;           /** UART context */
+static mtb_hal_uart_t               UART_hal_obj;           /** Debug UART HAL object  */
 
 /*******************************************************************************
 * Function Name: main
@@ -94,13 +98,35 @@ int main(void)
     /* Enable global interrupts */
     __enable_irq();
 
-    /* Initialize retarget-io to use the debug UART port */
-     Cy_SCB_UART_Init(UART_HW, &UART_config, NULL);
-     Cy_SCB_UART_Enable(UART_HW);
-     cy_retarget_io_init(UART_HW);
-    /* Disable DCache */
     SCB_DisableDCache();
 
+    /* Debug UART init */
+    result = (cy_rslt_t)Cy_SCB_UART_Init(UART_HW, &UART_config, &UART_context);
+
+    /* UART init failed. Stop program execution */
+    if (result != CY_RSLT_SUCCESS)
+    {
+        CY_ASSERT(0);
+    }
+
+    Cy_SCB_UART_Enable(UART_HW);
+
+    /* Setup the HAL UART */
+    result = mtb_hal_uart_setup(&UART_hal_obj, &UART_hal_config, &UART_context, NULL);
+
+    /* HAL UART init failed. Stop program execution */
+    if (result != CY_RSLT_SUCCESS)
+    {
+        CY_ASSERT(0);
+    }
+
+    result = cy_retarget_io_init(&UART_hal_obj);
+
+    /* HAL retarget_io init failed. Stop program execution */
+    if (result != CY_RSLT_SUCCESS)
+    {
+        CY_ASSERT(0);
+    }
 
     printf("\r\n__________________________________________________________________________\r\n*\t\t"\
             "PDL: Code Flash Sector Data Updating\r\n*\r\n*\tThis code example"\
@@ -253,7 +279,7 @@ int main(void)
         }
         /* Verify erase state */
         memset(read_buff, 0, sizeof(read_buff));
-       memcpy(read_buff, (void *)(TEST_TARGET_ADDR + (PageNum * CY_FLASH_SIZEOF_ROW)), TEST_TARGET_SIZE);
+        memcpy(read_buff, (void *)(TEST_TARGET_ADDR + (PageNum * CY_FLASH_SIZEOF_ROW)), TEST_TARGET_SIZE);
        for(uint32_t i = 0; i < CY_FLASH_SIZEOF_ROW; i++)
         {
            if(read_buff[i] != write_buff[i])
