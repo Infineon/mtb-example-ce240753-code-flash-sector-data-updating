@@ -4,7 +4,7 @@ This code example demonstrates the use of the Flash PDL driver to perform basic 
 
 [View this README on GitHub.](https://github.com/Infineon/mtb-example-ce240753-code-flash-sector-data-updating)
 
-[Provide feedback on this code example.](https://yourvoice.infineon.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyNDA3NTMiLCJTcGVjIE51bWJlciI6IjAwMi00MDc1MyIsIkRvYyBUaXRsZSI6IlBETDogQ29kZSBmbGFzaCBzZWN0b3IgZGF0YSB1cGRhdGluZyIsInJpZCI6ImtvamkubWl6dW1vdG9AaW5maW5lb24uY29tIiwiRG9jIHZlcnNpb24iOiIyLjIuMCIsIkRvYyBMYW5ndWFnZSI6IkVuZ2xpc2giLCJEb2MgRGl2aXNpb24iOiJNQ0QiLCJEb2MgQlUiOiJBVVRPIiwiRG9jIEZhbWlseSI6IkFVVE8gTUNVIn0=)
+[Provide feedback on this code example.](https://yourvoice.infineon.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyNDA3NTMiLCJTcGVjIE51bWJlciI6IjAwMi00MDc1MyIsIkRvYyBUaXRsZSI6IlBETDogQ29kZSBmbGFzaCBzZWN0b3IgZGF0YSB1cGRhdGluZyIsInJpZCI6ImtvamkubWl6dW1vdG9AaW5maW5lb24uY29tIiwiRG9jIHZlcnNpb24iOiIyLjMuMCIsIkRvYyBMYW5ndWFnZSI6IkVuZ2xpc2giLCJEb2MgRGl2aXNpb24iOiJNQ0QiLCJEb2MgQlUiOiJBVVRPIiwiRG9jIEZhbWlseSI6IkFVVE8gTUNVIn0=)
 
 
 ## Requirements
@@ -289,6 +289,7 @@ Document title: *CE240753 – PDL: Code flash sector data updating*
 | 2.0.0   | Updated to support ModusToolbox&trade; software v3.4      |
 | 2.1.0   | Added support for KIT_XMC52_EVK, KIT_T2G_C-2D-4M_LITE, KIT_T2G-B-H_EVK and KIT_T2G-B-H_LITE, and updated to support ModusToolbox&trade; v3.6 |
 | 2.2.0   | Added support for KIT_T2G_B-H-16M_LITE, and updated to support ModusToolbox&trade; v3.7 |
+  2.3.0   | Updated design.modus of the KIT_T2G_B-H-16M_LITE and KIT_T2G_C-2D-4M_LITE for addressing CLK warning      |
 <br>
 
 
